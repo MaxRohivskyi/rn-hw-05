@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Image, Text, FlatList } from "react-native";
-import PostItemSimple from "../components/PostItemSimple/PostItemSimple";
-import { userPosts } from "../components/userPosts";
+import PostItemSimple from "../../components/PostItemSimple/PostItemSimple";
+import { userPosts } from "../../components/userPosts";
 
-const image = "../img//user-foto.jpg";
+const image = "../../img//user-foto.jpg";
 
-const PostsScreen = () => {
+const DefaultPhotoScreen = ({ navigation, route }) => {
+  const [posts, setPosts] = useState(userPosts);
+
+  useEffect(() => {
+    if (route.params) {
+      setPosts((prevState) => [...prevState, route.params]);
+    }
+  }, [route.params]);
+
   return (
     <View style={styles.postsContainer}>
       <View style={styles.userContainer}>
@@ -16,8 +24,10 @@ const PostsScreen = () => {
         </View>
       </View>
       <FlatList
-        data={userPosts}
-        renderItem={({ item }) => <PostItemSimple data={item} />}
+        data={posts}
+        renderItem={({ item }) => (
+          <PostItemSimple data={item} navigation={navigation} />
+        )}
         keyExtractor={(item) => item.id}
       />
     </View>
@@ -63,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PostsScreen;
+export default DefaultPhotoScreen;

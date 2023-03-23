@@ -12,16 +12,17 @@ import {
   Dimensions,
   FlatList,
 } from "react-native";
-import PostItem from "../components/PostItem/PostItem";
-import { userPosts } from "../components/userPosts";
+import PostItem from "../../components/PostItem/PostItem";
+import { userPosts } from "../../components/userPosts";
 
-const backgroundPicture = "../img/photo-bg.jpg";
-const userImage = "../img/user-foto.jpg";
+const backgroundPicture = "../../img/photo-bg.jpg";
+const userImage = "../../img/user-foto.jpg";
 
 const ProfileScreen = ({ navigation }) => {
   const [windowWidth, setWindowWidth] = useState(
     Dimensions.get("window").width
   );
+
   const [windowHeight, setWindowHeight] = useState(
     Dimensions.get("window").height
   );
